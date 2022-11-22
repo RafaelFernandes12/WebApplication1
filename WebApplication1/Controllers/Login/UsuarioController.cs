@@ -9,46 +9,46 @@ using System.Net;
 
 namespace WebApplication.Controllers
 {
-    public class ProcedimentosController : Controller
+    public class UsuarioController : Controller
     {
-        private ExameDAL exameDAL = new ExameDAL();
+        private UsuarioDAL usuarioDAL = new UsuarioDAL();
 
-        private ActionResult ObterVisaoExamePorId(long? id)
+        private ActionResult ObterVisaoUsuarioPorId(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(
                 HttpStatusCode.BadRequest);
             }
-            Exame exame = exameDAL.ObterExamePorId((long)id);
-            if (exame == null)
+            Usuario usuario = usuarioDAL.ObterUsuarioPorId((long)id);
+            if (usuario == null)
             {
                 return HttpNotFound();
             }
-            return View(exame);
+            return View(usuario);
         }
 
-        private ActionResult GravarExame(Exame exame)
+        private ActionResult GravarUsuario(Usuario usuario)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    exameDAL.GravarExame(exame);
+                    usuarioDAL.GravarUsuario(usuario);
                     return RedirectToAction("Index");
                 }
-                return View(exame);
+                return View(usuario);
             }
             catch
             {
-                return View(exame);
+                return View(usuario);
             }
         }
 
 
         public ActionResult Index()
         {
-            return View(exameDAL.ObterExamesClassificadosPorDescricao());
+            return View(usuarioDAL.ObterUsuariosClassificadosPorUsuarioNome());
         }
 
         public ActionResult Create()
@@ -58,31 +58,31 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Exame exame)
+        public ActionResult Create(Usuario usuario)
         {
-            return GravarExame(exame);
+            return GravarUsuario(usuario);
         }
 
         public ActionResult Edit(long? id)
         {
-            return ObterVisaoExamePorId(id);
+            return ObterVisaoUsuarioPorId(id);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Exame exame)
+        public ActionResult Edit(Usuario usuario)
         {
-            return GravarExame(exame);
+            return GravarUsuario(usuario);
         }
 
         public ActionResult Details(long? id)
         {
-            return ObterVisaoExamePorId(id);
+            return ObterVisaoUsuarioPorId(id);
         }
 
         public ActionResult Delete(long? id)
         {
-            return ObterVisaoExamePorId(id);
+            return ObterVisaoUsuarioPorId(id);
         }
 
         [HttpPost]
@@ -91,8 +91,8 @@ namespace WebApplication.Controllers
         {
             try
             {
-                Exame exame = exameDAL.EliminarExamePorId(id);
-                TempData["Message"] = "Exame " + exame.Descricao.ToUpper() + " foi removido";
+                Usuario usuario = usuarioDAL.EliminarUsuarioPorId(id);
+                TempData["Message"] = "Usuario " + usuario.UsuarioNome.ToUpper() + " foi removido";
                 return RedirectToAction("Index");
             }
             catch

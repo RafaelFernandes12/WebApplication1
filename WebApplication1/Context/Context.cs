@@ -11,5 +11,7 @@ namespace WebApplication.Context
     {
         public EFContext() : base("Asp_Net_MVC_CS") { }
         public DbSet<Exame> Exames { get; set; }
+        public DbSet<Especie> Especies { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }
