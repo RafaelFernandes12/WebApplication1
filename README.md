@@ -10,4 +10,4 @@ Verifique usando o `git status` novamente. Se não houver mais arquivos em verde
 5. Por fim, utilize o comando `git push` para enviar seus commits para o Github   
 ESTA ETAPA 5 É MUITO IMPORTANTE! NÃO ESQUEÇA DE MANDAR PARA O GITHUB!
 
-const Tendeu_Zé? = 'altere a mensagem se entendeu zé'
+const Tendeu_Zé? = Sim kkkkk, entendir Rafa
