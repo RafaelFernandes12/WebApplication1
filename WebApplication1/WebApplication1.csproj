@@ -156,6 +156,7 @@
     <Compile Include="Controllers\Animal\EspeciesController.cs" />
     <Compile Include="Controllers\Login\ClienteController.cs" />
     <Compile Include="Controllers\Login\UsuarioController.cs" />
+    <Compile Include="Controllers\Login\VeterinarioController.cs" />
     <Compile Include="Controllers\Procedimento\ConsultasController.cs" />
     <Compile Include="Controllers\Procedimento\ExameController.cs" />
     <Compile Include="DAL\Cadastros\ClienteDAL.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="DAL\Cadastros\EspecieDAL.cs" />
     <Compile Include="DAL\Cadastros\ExameDAL.cs" />
     <Compile Include="DAL\Cadastros\UsuarioDAL.cs" />
+    <Compile Include="DAL\Cadastros\VeterinarioDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,6 +173,7 @@
     <Compile Include="Models\Especie.cs" />
     <Compile Include="Models\Exame.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Veterinario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +206,11 @@
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Cliente\Details.cshtml" />
     <Content Include="Views\Cliente\Delete.cshtml" />
+    <Content Include="Views\Veterinario\Index.cshtml" />
+    <Content Include="Views\Veterinario\Create.cshtml" />
+    <Content Include="Views\Veterinario\Edit.cshtml" />
+    <Content Include="Views\Veterinario\Details.cshtml" />
+    <Content Include="Views\Veterinario\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

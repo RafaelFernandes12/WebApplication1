@@ -9,18 +9,18 @@ using System.Net;
 
 namespace WebApplication.Controllers
 {
-    public class ClienteController : Controller
+    public class VeterinarioController : Controller
     {
-        private ClienteDAL clienteDAL = new ClienteDAL();
+        private VeterinarioDAL clienteDAL = new VeterinarioDAL();
 
-        private ActionResult ObterVisaoClientePorId(long? id)
+        private ActionResult ObterVisaoVeterinarioPorId(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(
                 HttpStatusCode.BadRequest);
             }
-            Cliente cliente = clienteDAL.ObterClientePorId((long)id);
+            Veterinario cliente = clienteDAL.ObterVeterinarioPorId((long)id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -28,13 +28,13 @@ namespace WebApplication.Controllers
             return View(cliente);
         }
 
-        private ActionResult GravarCliente(Cliente cliente)
+        private ActionResult GravarVeterinario(Veterinario cliente)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    clienteDAL.GravarCliente(cliente);
+                    clienteDAL.GravarVeterinario(cliente);
                     return RedirectToAction("Index");
                 }
                 return View(cliente);
@@ -48,7 +48,7 @@ namespace WebApplication.Controllers
 
         public ActionResult Index()
         {
-            return View(clienteDAL.ObterClientesClassificadosPorCpf());
+            return View(clienteDAL.ObterVeterinariosClassificadosPorCrmv());
         }
 
         public ActionResult Create()
@@ -58,31 +58,31 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Cliente cliente)
+        public ActionResult Create(Veterinario cliente)
         {
-            return GravarCliente(cliente);
+            return GravarVeterinario(cliente);
         }
 
         public ActionResult Edit(long? id)
         {
-            return ObterVisaoClientePorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Cliente cliente)
+        public ActionResult Edit(Veterinario cliente)
         {
-            return GravarCliente(cliente);
+            return GravarVeterinario(cliente);
         }
 
         public ActionResult Details(long? id)
         {
-            return ObterVisaoClientePorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
 
         public ActionResult Delete(long? id)
         {
-            return ObterVisaoClientePorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
 
         [HttpPost]
@@ -91,8 +91,8 @@ namespace WebApplication.Controllers
         {
             try
             {
-                Cliente cliente = clienteDAL.EliminarClientePorId(id);
-                TempData["Message"] = "Cliente " + cliente.Cpf.ToUpper() + " foi removido";
+                Veterinario cliente = clienteDAL.EliminarVeterinarioPorId(id);
+                TempData["Message"] = "Veterinario " + cliente.Crmv.ToUpper() + " foi removido";
                 return RedirectToAction("Index");
             }
             catch

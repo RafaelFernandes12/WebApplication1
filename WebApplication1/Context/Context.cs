@@ -15,5 +15,6 @@ namespace WebApplication.Context
         public DbSet<Especie> Especies { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Veterinario> Veterinarios { get; set; }
     }
 }
