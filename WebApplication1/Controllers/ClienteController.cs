@@ -4,51 +4,51 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using WebApplication.DAL.Cadastros;
+using WebApplication1.DAL;
 using System.Net;
 
-namespace WebApplication.Controllers
+namespace WebApplication1.Controllers
 {
-    public class ExameController : Controller
+    public class ClienteController : Controller
     {
-        private ExameDAL exameDAL = new ExameDAL();
+        private ClienteDAL clienteDAL = new ClienteDAL();
 
-        private ActionResult ObterVisaoExamePorId(long? id)
+        private ActionResult ObterVisaoClientePorId(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(
                 HttpStatusCode.BadRequest);
             }
-            Exame exame = exameDAL.ObterExamePorId((long)id);
-            if (exame == null)
+            Cliente cliente = clienteDAL.ObterClientePorId((long)id);
+            if (cliente == null)
             {
                 return HttpNotFound();
             }
-            return View(exame);
+            return View(cliente);
         }
 
-        private ActionResult GravarExame(Exame exame)
+        private ActionResult GravarCliente(Cliente cliente)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    exameDAL.GravarExame(exame);
+                    clienteDAL.GravarCliente(cliente);
                     return RedirectToAction("Index");
                 }
-                return View(exame);
+                return View(cliente);
             }
             catch
             {
-                return View(exame);
+                return View(cliente);
             }
         }
 
 
         public ActionResult Index()
         {
-            return View(exameDAL.ObterExamesClassificadosPorDescricao());
+            return View(clienteDAL.ObterClientesClassificadosPorCpf());
         }
 
         public ActionResult Create()
@@ -58,31 +58,31 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Exame exame)
+        public ActionResult Create(Cliente cliente)
         {
-            return GravarExame(exame);
+            return GravarCliente(cliente);
         }
 
         public ActionResult Edit(long? id)
         {
-            return ObterVisaoExamePorId(id);
+            return ObterVisaoClientePorId(id);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Exame exame)
+        public ActionResult Edit(Cliente cliente)
         {
-            return GravarExame(exame);
+            return GravarCliente(cliente);
         }
 
         public ActionResult Details(long? id)
         {
-            return ObterVisaoExamePorId(id);
+            return ObterVisaoClientePorId(id);
         }
 
         public ActionResult Delete(long? id)
         {
-            return ObterVisaoExamePorId(id);
+            return ObterVisaoClientePorId(id);
         }
 
         [HttpPost]
@@ -91,8 +91,8 @@ namespace WebApplication.Controllers
         {
             try
             {
-                Exame exame = exameDAL.EliminarExamePorId(id);
-                TempData["Message"] = "Exame " + exame.Descricao.ToUpper() + " foi removido";
+                Cliente cliente = clienteDAL.EliminarClientePorId(id);
+                TempData["Message"] = "Cliente " + cliente.Cpf.ToUpper() + " foi removido";
                 return RedirectToAction("Index");
             }
             catch

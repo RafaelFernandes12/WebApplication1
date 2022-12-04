@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using WebApplication.Context;
+using WebApplication1.Context;
 using WebApplication1.Models;
 
-namespace WebApplication.DAL.Cadastros
+namespace WebApplication1.DAL
 {
     public class ConsultaDAL
     {
         private EFContext context = new EFContext();
-        public IQueryable<Consulta> ObterConsultasClassificadosPorSintomas()
+        public IQueryable<Consulta> ObterConsultasClassificadosPorId()
         {
-            return context.Consultas.OrderBy(b => b.Sintomas);
+            return context.Consultas.OrderBy(b => b.ConsultaId);
         }
         public Consulta ObterConsultaPorId(long id)
         {

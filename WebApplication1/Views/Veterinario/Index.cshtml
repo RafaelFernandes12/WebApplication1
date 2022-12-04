@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WebApplication1.Models.Veterinario>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -20,22 +20,41 @@
             <th>
                 @Html.DisplayNameFor(model => model.Crmv)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Senha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Crmv)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.VeterinarioId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.VeterinarioId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.VeterinarioId })
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Crmv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Senha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UsuarioId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.UsuarioId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UsuarioId })
+                </td>
+            </tr>
+        }
+
     </table>
 </body>
 </html>

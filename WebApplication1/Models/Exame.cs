@@ -9,5 +9,6 @@ namespace WebApplication1.Models
     {
         public long ExameId { get; set; }
         public string Descricao { get; set; }
+        public virtual ICollection<Consulta> Consultas { get; set; }
     }
 }

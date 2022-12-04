@@ -4,51 +4,51 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using WebApplication.DAL.Cadastros;
+using WebApplication1.DAL;
 using System.Net;
 
-namespace WebApplication.Controllers
+namespace WebApplication1.Controllers
 {
-    public class UsuarioController : Controller
+    public class EspeciesController : Controller
     {
-        private UsuarioDAL usuarioDAL = new UsuarioDAL();
+        private EspecieDAL especieDAL = new EspecieDAL();
 
-        private ActionResult ObterVisaoUsuarioPorId(long? id)
+        private ActionResult ObterVisaoEspeciePorId(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(
                 HttpStatusCode.BadRequest);
             }
-            Usuario usuario = usuarioDAL.ObterUsuarioPorId((long)id);
-            if (usuario == null)
+            Especie especie = especieDAL.ObterEspeciePorId((long)id);
+            if (especie == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(especie);
         }
 
-        private ActionResult GravarUsuario(Usuario usuario)
+        private ActionResult GravarEspecie(Especie especie)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    usuarioDAL.GravarUsuario(usuario);
+                    especieDAL.GravarEspecie(especie);
                     return RedirectToAction("Index");
                 }
-                return View(usuario);
+                return View(especie);
             }
             catch
             {
-                return View(usuario);
+                return View(especie);
             }
         }
 
 
         public ActionResult Index()
         {
-            return View(usuarioDAL.ObterUsuariosClassificadosPorUsuarioNome());
+            return View(especieDAL.ObterEspeciesClassificadosPorEspecieNome());
         }
 
         public ActionResult Create()
@@ -58,31 +58,31 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Usuario usuario)
+        public ActionResult Create(Especie especie)
         {
-            return GravarUsuario(usuario);
+            return GravarEspecie(especie);
         }
 
         public ActionResult Edit(long? id)
         {
-            return ObterVisaoUsuarioPorId(id);
+            return ObterVisaoEspeciePorId(id);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Usuario usuario)
+        public ActionResult Edit(Especie especie)
         {
-            return GravarUsuario(usuario);
+            return GravarEspecie(especie);
         }
 
         public ActionResult Details(long? id)
         {
-            return ObterVisaoUsuarioPorId(id);
+            return ObterVisaoEspeciePorId(id);
         }
 
         public ActionResult Delete(long? id)
         {
-            return ObterVisaoUsuarioPorId(id);
+            return ObterVisaoEspeciePorId(id);
         }
 
         [HttpPost]
@@ -91,8 +91,8 @@ namespace WebApplication.Controllers
         {
             try
             {
-                Usuario usuario = usuarioDAL.EliminarUsuarioPorId(id);
-                TempData["Message"] = "Usuario " + usuario.UsuarioNome.ToUpper() + " foi removido";
+                Especie especie = especieDAL.EliminarEspeciePorId(id);
+                TempData["Message"] = "Especie " + especie.Nome.ToUpper() + " foi removido";
                 return RedirectToAction("Index");
             }
             catch

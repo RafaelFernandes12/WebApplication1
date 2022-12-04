@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using WebApplication.Context;
+using WebApplication1.Context;
 using WebApplication1.Models;
 
-namespace WebApplication.DAL.Cadastros
+namespace WebApplication1.DAL
 {
     public class ClienteDAL
     {
@@ -17,11 +17,11 @@ namespace WebApplication.DAL.Cadastros
         }
         public Cliente ObterClientePorId(long id)
         {
-            return context.Clientes.Where(f => f.ClienteId == id).First();
+            return context.Clientes.Where(f => f.UsuarioId == id).First();
         }
         public void GravarCliente(Cliente cliente)
         {
-            if (cliente.ClienteId == 0)
+            if (cliente.UsuarioId == 0)
             {
                 context.Clientes.Add(cliente);
             }

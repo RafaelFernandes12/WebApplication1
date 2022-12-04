@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using WebApplication.Context;
+using WebApplication1.Context;
 using WebApplication1.Models;
 
-namespace WebApplication.DAL.Cadastros
+namespace WebApplication1.DAL
 {
     public class VeterinarioDAL
     {
@@ -17,11 +17,11 @@ namespace WebApplication.DAL.Cadastros
         }
         public Veterinario ObterVeterinarioPorId(long id)
         {
-            return context.Veterinarios.Where(f => f.VeterinarioId == id).First();
+            return context.Veterinarios.Where(f => f.UsuarioId == id).First();
         }
         public void GravarVeterinario(Veterinario cliente)
         {
-            if (cliente.VeterinarioId == 0)
+            if (cliente.UsuarioId == 0)
             {
                 context.Veterinarios.Add(cliente);
             }

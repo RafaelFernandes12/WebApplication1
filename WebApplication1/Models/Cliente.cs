@@ -5,9 +5,8 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class Cliente
+    public class Cliente : Usuario
     {
         public string Cpf { get; set; }
-        public int ClienteId { get; set; }
     }
 }

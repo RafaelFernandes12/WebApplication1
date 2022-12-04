@@ -4,51 +4,51 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using WebApplication.DAL.Cadastros;
+using WebApplication1.DAL;
 using System.Net;
 
-namespace WebApplication.Controllers
+namespace WebApplication1.Controllers
 {
-    public class EspeciesController : Controller
+    public class VeterinarioController : Controller
     {
-        private EspecieDAL especieDAL = new EspecieDAL();
+        private VeterinarioDAL clienteDAL = new VeterinarioDAL();
 
-        private ActionResult ObterVisaoEspeciePorId(long? id)
+        private ActionResult ObterVisaoVeterinarioPorId(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(
                 HttpStatusCode.BadRequest);
             }
-            Especie especie = especieDAL.ObterEspeciePorId((long)id);
-            if (especie == null)
+            Veterinario cliente = clienteDAL.ObterVeterinarioPorId((long)id);
+            if (cliente == null)
             {
                 return HttpNotFound();
             }
-            return View(especie);
+            return View(cliente);
         }
 
-        private ActionResult GravarEspecie(Especie especie)
+        private ActionResult GravarVeterinario(Veterinario cliente)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    especieDAL.GravarEspecie(especie);
+                    clienteDAL.GravarVeterinario(cliente);
                     return RedirectToAction("Index");
                 }
-                return View(especie);
+                return View(cliente);
             }
             catch
             {
-                return View(especie);
+                return View(cliente);
             }
         }
 
 
         public ActionResult Index()
         {
-            return View(especieDAL.ObterEspeciesClassificadosPorEspecieNome());
+            return View(clienteDAL.ObterVeterinariosClassificadosPorCrmv());
         }
 
         public ActionResult Create()
@@ -58,31 +58,31 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Especie especie)
+        public ActionResult Create(Veterinario cliente)
         {
-            return GravarEspecie(especie);
+            return GravarVeterinario(cliente);
         }
 
         public ActionResult Edit(long? id)
         {
-            return ObterVisaoEspeciePorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Especie especie)
+        public ActionResult Edit(Veterinario cliente)
         {
-            return GravarEspecie(especie);
+            return GravarVeterinario(cliente);
         }
 
         public ActionResult Details(long? id)
         {
-            return ObterVisaoEspeciePorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
 
         public ActionResult Delete(long? id)
         {
-            return ObterVisaoEspeciePorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
 
         [HttpPost]
@@ -91,8 +91,8 @@ namespace WebApplication.Controllers
         {
             try
             {
-                Especie especie = especieDAL.EliminarEspeciePorId(id);
-                TempData["Message"] = "Especie " + especie.EspecieNome.ToUpper() + " foi removido";
+                Veterinario cliente = clienteDAL.EliminarVeterinarioPorId(id);
+                TempData["Message"] = "Veterinario " + cliente.Crmv.ToUpper() + " foi removido";
                 return RedirectToAction("Index");
             }
             catch

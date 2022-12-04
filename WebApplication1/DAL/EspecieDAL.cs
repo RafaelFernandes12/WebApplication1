@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using WebApplication.Context;
+using WebApplication1.Context;
 using WebApplication1.Models;
 
-namespace WebApplication.DAL.Cadastros
+namespace WebApplication1.DAL
 {
     public class EspecieDAL
     {
         private EFContext context = new EFContext();
         public IQueryable<Especie> ObterEspeciesClassificadosPorEspecieNome()
         {
-            return context.Especies.OrderBy(b => b.EspecieNome);
+            return context.Especies.OrderBy(b => b.Nome);
         }
         public Especie ObterEspeciePorId(long id)
         {

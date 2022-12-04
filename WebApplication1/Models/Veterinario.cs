@@ -5,9 +5,8 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class Veterinario
+    public class Veterinario : Usuario
     {
         public string Crmv { get; set; }
-        public long VeterinarioId { get; set; }
     }
 }
